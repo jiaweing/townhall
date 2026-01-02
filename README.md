@@ -59,12 +59,23 @@ townhall/
 ├── apps/
 │   ├── web/         # Frontend application (Next.js)
 │   ├── native/      # Mobile application (React Native, Expo)
-│   └── server/      # Backend API (Hono)
+│   ├── server/      # Backend API (Hono)
+│   ├── extension/   # Browser extension
+│   └── fumadocs/    # Documentation
 ├── packages/
 │   ├── api/         # API layer / business logic
 │   ├── auth/        # Authentication configuration & logic
 │   └── db/          # Database schema & queries
 ```
+
+## Assets
+
+To properly display icons and emojis in the application, you need to download the animated fluent emojis.
+
+1. Download the asset pack from [Animated Fluent Emojis](https://github.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis).
+2. Create the directory `assets/web/icons` in the root of the project if it doesn't exist.
+3. Extract and place the emoji assets into `assets/web/icons`.
+
 
 ## Available Scripts
 

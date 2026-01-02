@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 export function MagicalBackground({
 	show,
 	pulse = true,
+	className,
 }: {
 	show: boolean;
 	pulse?: boolean;
+	className?: string;
 }) {
 	const [mounted, setMounted] = useState(false);
 
@@ -24,6 +26,7 @@ export function MagicalBackground({
 			className={cn(
 				"fixed inset-0 pointer-events-none z-[51] transition-opacity duration-700",
 				show ? "opacity-100" : "opacity-0",
+				className,
 			)}
 			aria-hidden="true"
 		>

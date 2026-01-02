@@ -1,9 +1,7 @@
 "use client";
 
 import { MagicalBackground } from "@/components/magical-background";
-import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -68,6 +66,7 @@ export function WelcomeLetter() {
 				<MagicalBackground
 					show={showLetter || showEnvelope}
 					pulse={!showLetter}
+					className="z-[70]"
 				/>
 			</motion.div>
 
@@ -79,7 +78,7 @@ export function WelcomeLetter() {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0, scale: 0.9, rotate: -5 }}
 						transition={{ duration: 0.5 }}
-						className="fixed inset-0 z-[60] flex flex-col items-center justify-center p-4"
+						className="fixed inset-0 z-[60] flex flex-col items-center justify-center p-4 backdrop-blur-md bg-black/50"
 					>
 						<motion.h1
 							initial={{ y: 20, opacity: 0 }}
@@ -132,39 +131,63 @@ export function WelcomeLetter() {
 				)}
 
 				{showLetter && (
-					<motion.div
-						key="letter-overlay"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.3 }}
-						className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
-					>
+					<>
 						<motion.div
-							key="letter"
-							initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
-							animate={{ opacity: 1, scale: 1, rotate: -1 }}
-							exit={{
-								opacity: 0,
-								y: 100,
-								rotate: 20,
-								scale: 0.5,
-								transition: { duration: 0.6, ease: "easeIn" },
-							}}
-							className="relative w-full sm:max-w-md bg-background ring-ring/10 ring-6 shadow-2xl overflow-hidden rounded-xl"
+							key="letter-backdrop"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.3 }}
+							className="fixed inset-0 z-[65] bg-black/50 backdrop-blur-sm"
+						/>
+						<motion.div
+							key="letter-overlay"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.3 }}
+							className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-none"
 						>
-							<div className="relative min-h-[500px] w-full bg-background overflow-hidden flex flex-col">
-								{/* Dashed Bottom Fade Grid */}
-								<div
-									className="absolute inset-0 z-0 pointer-events-none"
-									style={{
-										backgroundImage: `
+							<motion.div
+								key="letter"
+								initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
+								animate={{
+									opacity: 1,
+									scale: 1,
+									rotate: -1,
+									y: [0, -10, 0],
+								}}
+								exit={{
+									opacity: 0,
+									y: 100,
+									rotate: 20,
+									scale: 0.5,
+									transition: { duration: 0.6, ease: "easeIn" },
+								}}
+								transition={{
+									y: {
+										duration: 6,
+										repeat: Infinity,
+										ease: "easeInOut",
+									},
+									opacity: { duration: 0.3 },
+									scale: { duration: 0.3 },
+									rotate: { duration: 0.3 },
+								}}
+								className="relative w-full sm:max-w-md bg-background ring-ring/10 ring-6 shadow-2xl overflow-hidden rounded-xl pointer-events-auto"
+							>
+								<div className="relative min-h-[500px] w-full bg-background overflow-hidden flex flex-col">
+									{/* Dashed Bottom Fade Grid */}
+									<div
+										className="absolute inset-0 z-0 pointer-events-none"
+										style={{
+											backgroundImage: `
                       linear-gradient(to right, var(--border) 1px, transparent 1px),
                       linear-gradient(to bottom, var(--border) 1px, transparent 1px)
                     `,
-										backgroundSize: "20px 20px",
-										backgroundPosition: "0 0, 0 0",
-										maskImage: `
+											backgroundSize: "20px 20px",
+											backgroundPosition: "0 0, 0 0",
+											maskImage: `
                       repeating-linear-gradient(
                         to right,
                         black 0px,
@@ -181,7 +204,7 @@ export function WelcomeLetter() {
                       ),
                       radial-gradient(ellipse 100% 80% at 50% 100%, black 50%, transparent 90%)
                     `,
-										WebkitMaskImage: `
+											WebkitMaskImage: `
                       repeating-linear-gradient(
                         to right,
                         black 0px,
@@ -198,61 +221,53 @@ export function WelcomeLetter() {
                       ),
                       radial-gradient(ellipse 100% 80% at 50% 100%, black 50%, transparent 90%)
                     `,
-										maskComposite: "intersect",
-										WebkitMaskComposite: "source-in",
-									}}
-								/>
+											maskComposite: "intersect",
+											WebkitMaskComposite: "source-in",
+										}}
+									/>
 
-								<div className="text-foreground p-4 text-center relative z-10 border-b">
-									<div className="text-2xl font-serif tracking-wide">
-										A Letter from the Founders
+									<div className="text-foreground p-4 text-center relative z-10 border-b">
+										<div className="text-2xl font-serif tracking-wide">
+											A Letter from the Founders
+										</div>
 									</div>
-									<div className="absolute top-2 right-2">
-										<Button
-											variant="ghost"
-											size="icon"
+									<div className="p-6 space-y-4 text-foreground leading-relaxed relative z-10 overflow-y-auto flex-1">
+										<p>Greetings, Traveler!</p>
+										<p>
+											Welcome to Townhall. We've built this space with a simple
+											dream: to bring people together in a way that feels
+											genuine, fun, and truly yours.
+										</p>
+										<p>
+											This isn't just another platform; it's a playground for
+											your community. Whether you're planning the next big
+											event, sharing your latest creation, or just hanging out,
+											we want this to feel like home.
+										</p>
+										<p>
+											So go ahead, explore, break things (gently), and let us
+											know what you think. We're just getting started, and we're
+											so glad you're here for the ride.
+										</p>
+										<p className="font-signature font-bold text-3xl text-right mt-8 pr-4 rotate-[-2deg]">
+											— Jia Wei Ng
+										</p>
+
+										<div
 											onClick={handleClose}
-											className="text-foreground hover:bg-black/5"
+											className="flex items-center justify-center gap-2 mt-8 pb-2 text-muted-foreground/60 text-lg font-serif animate-pulse cursor-pointer hover:text-foreground transition-colors"
 										>
-											<span className="sr-only">Close</span>
-											<X className="w-6 h-6" />
-										</Button>
+											<span>—</span>
+											<span>♦</span>
+											<span className="tracking-widest">Tap to close</span>
+											<span>♦</span>
+											<span>—</span>
+										</div>
 									</div>
 								</div>
-								<div className="p-6 space-y-4 text-foreground leading-relaxed relative z-10 overflow-y-auto flex-1">
-									<p>Greetings, Traveler!</p>
-									<p>
-										Welcome to Townhall. We've built this space with a simple
-										dream: to bring people together in a way that feels genuine,
-										fun, and truly yours.
-									</p>
-									<p>
-										This isn't just another platform; it's a playground for your
-										community. Whether you're planning the next big event,
-										sharing your latest creation, or just hanging out, we want
-										this to feel like home.
-									</p>
-									<p>
-										So go ahead, explore, break things (gently), and let us know
-										what you think. We're just getting started, and we're so
-										glad you're here for the ride.
-									</p>
-									<p className="font-signature font-bold text-3xl text-right mt-8 pr-4 rotate-[-2deg]">
-										— Jia Wei Ng
-									</p>
-
-									<div className="flex justify-center mt-8 pb-2">
-										<Button
-											onClick={handleClose}
-											className="font-serif px-8 shadow-md"
-										>
-											Start Building
-										</Button>
-									</div>
-								</div>
-							</div>
+							</motion.div>
 						</motion.div>
-					</motion.div>
+					</>
 				)}
 			</AnimatePresence>
 		</div>
