@@ -65,7 +65,7 @@ export function GlobalOnboardingFlow() {
 		// Check cookie
 		const hasSeenOnboarding = document.cookie
 			.split("; ")
-			.find((row) => row.startsWith(ONBOARDING_COOKIE));
+			.find((row) => row.trim().startsWith(`${ONBOARDING_COOKIE}=`));
 
 		if (!hasSeenOnboarding) {
 			// Small delay to ensure smooth entry

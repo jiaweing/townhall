@@ -19,6 +19,7 @@ app.get("/current", async (c) => {
 // POST /admin/update - Create or Update a season (Admin Only)
 app.post("/admin/update", async (c) => {
 	const session = await auth.api.getSession({ headers: c.req.raw.headers });
+	console.log("Admin Update Session:", JSON.stringify(session, null, 2));
 
 	if (!session || session.user.role !== "admin") {
 		return c.json({ error: "Unauthorized" }, 401);

@@ -4,6 +4,7 @@ import { client } from "@townhall/db";
 import { env } from "@townhall/env/server";
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { admin } from "better-auth/plugins";
 
 import { polarClient } from "./lib/payments";
 
@@ -84,5 +85,6 @@ export const auth = betterAuth({
 			],
 		}),
 		expo(),
+		admin(),
 	],
 });

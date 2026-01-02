@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDistanceToNow } from "date-fns";
-import { ArrowRight, Flame, Loader2, Trophy } from "lucide-react";
+import { ArrowRight, Loader2, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -95,32 +95,33 @@ export default function Home() {
 
 			{/* Season Status Card */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<Card className="col-span-2 bg-card border-sidebar-border -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-[1.01]">
-					<CardHeader>
+				<Card
+					className="relative overflow-hidden col-span-2 bg-card border-sidebar-border -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-[1.01] bg-cover bg-center"
+					style={{ backgroundImage: "url('/assets/backgrounds/1.png')" }}
+				>
+					<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-0" />
+					<CardHeader className="relative z-10">
 						<div className="flex items-center justify-between">
 							<div className="space-y-1">
-								<CardTitle className="font-serif text-2xl">
+								<CardTitle className="font-serif text-2xl text-white">
 									{season
 										? `Season ${season.number}: ${season.title}`
 										: "Off-Season"}
 								</CardTitle>
-								<CardDescription>
+								<CardDescription className="text-white/80">
 									{active ? `Week ${week} of 6 is active.` : "Off-season mode."}
 								</CardDescription>
 							</div>
-							<div className="size-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center">
-								<Flame className="size-6 text-orange-600 dark:text-orange-500" />
-							</div>
 						</div>
 					</CardHeader>
-					<CardContent className="space-y-6">
+					<CardContent className="space-y-6 relative z-10">
 						{active && (
 							<div className="space-y-2">
-								<div className="flex justify-between text-sm">
+								<div className="flex justify-between text-sm text-white/90">
 									<span>Season Progress</span>
 									<span>{week}/6 Weeks</span>
 								</div>
-								<div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
+								<div className="h-2 w-full bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
 									<div
 										className="h-full bg-orange-500 rounded-full transition-all"
 										style={{ width: `${(week / 6) * 100}%` }}
@@ -131,12 +132,17 @@ export default function Home() {
 
 						<div className="flex gap-4">
 							<Link href="/feed">
-								<Button>
+								<Button className="bg-white text-black hover:bg-white/90 border-none shadow-lg">
 									Post an Update <ArrowRight className="ml-2 size-4" />
 								</Button>
 							</Link>
 							<Link href="/leaderboard">
-								<Button variant="outline">View Leaderboard</Button>
+								<Button
+									variant="outline"
+									className="bg-black/20 text-white border-white/20 hover:bg-black/40 hover:text-white backdrop-blur-sm"
+								>
+									View Leaderboard
+								</Button>
 							</Link>
 						</div>
 					</CardContent>

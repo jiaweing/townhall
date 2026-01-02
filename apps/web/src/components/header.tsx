@@ -11,6 +11,7 @@ import {
 } from "hugeicons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ProgressiveBlur } from "./progressive-blur";
 import UserMenu from "./user-menu";
 
 const NAV_ITEMS = [
@@ -24,8 +25,9 @@ export function Header() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<header className="h-14 bg-background/80 backdrop-blur-sm sticky top-0 z-30 py-10">
-			<div className="h-full max-w-5xl mx-auto px-4 flex items-center justify-between">
+		<header className="sticky top-0 z-30 py-4 h-24">
+			<ProgressiveBlur className="top-0 h-48" blurAmount="20px" />
+			<div className="h-full max-w-5xl mx-auto px-4 flex items-center justify-between relative z-10">
 				{/* Logo */}
 				<Link href="/" className="flex items-center gap-2">
 					<div className="size-9 rounded-xl flex items-center justify-center p-0.5">
@@ -55,7 +57,7 @@ export function Header() {
 							>
 								<item.icon
 									className={cn("size-6", isActive && "fill-current")}
-                  strokeWidth={2}
+									strokeWidth={2}
 								/>
 							</Link>
 						);
@@ -68,7 +70,7 @@ export function Header() {
 								"p-3 rounded-2xl transition-colors",
 								pathname.startsWith(`/${session.user.id}`)
 									? "text-foreground"
-                  : "text-muted-foreground/50 hover:bg-muted transition-colors duration-300",
+									: "text-muted-foreground/50 hover:bg-muted transition-colors duration-300",
 							)}
 							title="Your Profile"
 						>
@@ -77,7 +79,7 @@ export function Header() {
 									"size-6",
 									pathname.startsWith(`/${session.user.id}`) && "fill-current",
 								)}
-                strokeWidth={2}
+								strokeWidth={2}
 							/>
 						</Link>
 					)}

@@ -95,7 +95,7 @@ const items = [
 		),
 	},
 	{
-		id: "9",
+		id: "10",
 		title: "Are streaks mandatory?",
 		content:
 			"Streaks are completely optional! They are just a fun way to maintain a flame effect on your avatar to show your consistency. Don't stress about it if you miss a week.",

@@ -23,7 +23,7 @@ export function WelcomeLetter() {
 
 		const hasSeenOnboarding = document.cookie
 			.split("; ")
-			.find((row) => row.startsWith("townhall-onboarding-seen"));
+			.find((row) => row.trim().startsWith("townhall-onboarding-seen="));
 
 		if (hasSeenOnboarding) {
 			checkAndShow();
