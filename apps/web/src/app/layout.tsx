@@ -1,3 +1,4 @@
+import { GlobalOnboardingFlow } from "@/components/global-onboarding-flow";
 import { Header } from "@/components/header";
 import Providers from "@/components/providers";
 import { WelcomeLetter } from "@/components/welcome-letter";
@@ -40,6 +41,7 @@ export default function RootLayout({
 			>
 				<Providers>
 					<WelcomeLetter />
+					<GlobalOnboardingFlow />
 					<div className="min-h-svh w-full bg-background">
 						<Header />
 						<main className="w-full">{children}</main>

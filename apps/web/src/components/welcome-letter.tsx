@@ -14,10 +14,35 @@ export function WelcomeLetter() {
 
 	useEffect(() => {
 		setHasMounted(true);
-		const hasSeen = localStorage.getItem("townhall-welcome-seen");
-		if (!hasSeen) {
-			// Delay slightly to ensure fonts/layout loaded
-			setTimeout(() => setShowEnvelope(true), 500);
+
+		const checkAndShow = () => {
+			const hasSeenWelcome = localStorage.getItem("townhall-welcome-seen");
+			if (!hasSeenWelcome) {
+				// Delay slightly to ensure smooth entry
+				setTimeout(() => setShowEnvelope(true), 500);
+			}
+		};
+
+		const hasSeenOnboarding = document.cookie
+			.split("; ")
+			.find((row) => row.startsWith("townhall-onboarding-seen"));
+
+		if (hasSeenOnboarding) {
+			checkAndShow();
+		} else {
+			const handleOnboardingComplete = () => {
+				checkAndShow();
+			};
+			window.addEventListener(
+				"townhall-onboarding-complete",
+				handleOnboardingComplete,
+			);
+			return () => {
+				window.removeEventListener(
+					"townhall-onboarding-complete",
+					handleOnboardingComplete,
+				);
+			};
 		}
 	}, []);
 
@@ -128,51 +153,102 @@ export function WelcomeLetter() {
 							}}
 							className="relative w-full sm:max-w-md bg-background ring-ring/10 ring-6 shadow-2xl overflow-hidden rounded-xl"
 						>
-							<div className="bg-background text-foreground p-4 text-center relative">
-								<div className="text-2xl font-serif tracking-wide">
-									A Letter from the Founders
-								</div>
-								<div className="absolute top-2 right-2">
-									<Button
-										variant="ghost"
-										size="icon"
-										onClick={handleClose}
-										className="text-foreground hover:bg-black/5"
-									>
-										<span className="sr-only">Close</span>
-										<X className="w-6 h-6" />
-									</Button>
-								</div>
-							</div>
-							<div className="p-6 space-y-4 text-foreground leading-relaxed relative max-h-[70vh] overflow-y-auto">
-								<p>Greetings, Traveler!</p>
-								<p>
-									Welcome to Townhall. We've built this space with a simple
-									dream: to bring people together in a way that feels genuine,
-									fun, and truly yours.
-								</p>
-								<p>
-									This isn't just another platform; it's a playground for your
-									community. Whether you're planning the next big event, sharing
-									your latest creation, or just hanging out, we want this to
-									feel like home.
-								</p>
-								<p>
-									So go ahead, explore, break things (gently), and let us know
-									what you think. We're just getting started, and we're so glad
-									you're here for the ride.
-								</p>
-								<p className="font-signature font-bold text-3xl text-right mt-8 pr-4 rotate-[-2deg]">
-									— Jia Wei Ng
-								</p>
+							<div className="relative min-h-[500px] w-full bg-background overflow-hidden flex flex-col">
+								{/* Dashed Bottom Fade Grid */}
+								<div
+									className="absolute inset-0 z-0 pointer-events-none"
+									style={{
+										backgroundImage: `
+                      linear-gradient(to right, var(--border) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--border) 1px, transparent 1px)
+                    `,
+										backgroundSize: "20px 20px",
+										backgroundPosition: "0 0, 0 0",
+										maskImage: `
+                      repeating-linear-gradient(
+                        to right,
+                        black 0px,
+                        black 3px,
+                        transparent 3px,
+                        transparent 8px
+                      ),
+                      repeating-linear-gradient(
+                        to bottom,
+                        black 0px,
+                        black 3px,
+                        transparent 3px,
+                        transparent 8px
+                      ),
+                      radial-gradient(ellipse 100% 80% at 50% 100%, black 50%, transparent 90%)
+                    `,
+										WebkitMaskImage: `
+                      repeating-linear-gradient(
+                        to right,
+                        black 0px,
+                        black 3px,
+                        transparent 3px,
+                        transparent 8px
+                      ),
+                      repeating-linear-gradient(
+                        to bottom,
+                        black 0px,
+                        black 3px,
+                        transparent 3px,
+                        transparent 8px
+                      ),
+                      radial-gradient(ellipse 100% 80% at 50% 100%, black 50%, transparent 90%)
+                    `,
+										maskComposite: "intersect",
+										WebkitMaskComposite: "source-in",
+									}}
+								/>
 
-								<div className="flex justify-center mt-8 pb-2">
-									<Button
-										onClick={handleClose}
-										className="font-serif px-8 shadow-md"
-									>
-										Start Building
-									</Button>
+								<div className="text-foreground p-4 text-center relative z-10 border-b">
+									<div className="text-2xl font-serif tracking-wide">
+										A Letter from the Founders
+									</div>
+									<div className="absolute top-2 right-2">
+										<Button
+											variant="ghost"
+											size="icon"
+											onClick={handleClose}
+											className="text-foreground hover:bg-black/5"
+										>
+											<span className="sr-only">Close</span>
+											<X className="w-6 h-6" />
+										</Button>
+									</div>
+								</div>
+								<div className="p-6 space-y-4 text-foreground leading-relaxed relative z-10 overflow-y-auto flex-1">
+									<p>Greetings, Traveler!</p>
+									<p>
+										Welcome to Townhall. We've built this space with a simple
+										dream: to bring people together in a way that feels genuine,
+										fun, and truly yours.
+									</p>
+									<p>
+										This isn't just another platform; it's a playground for your
+										community. Whether you're planning the next big event,
+										sharing your latest creation, or just hanging out, we want
+										this to feel like home.
+									</p>
+									<p>
+										So go ahead, explore, break things (gently), and let us know
+										what you think. We're just getting started, and we're so
+										glad you're here for the ride.
+									</p>
+									<p className="font-signature font-bold text-3xl text-right mt-8 pr-4 rotate-[-2deg]">
+										— Jia Wei Ng
+									</p>
+
+									<div className="flex justify-center mt-8 pb-2">
+										<Button
+											onClick={handleClose}
+											className="font-serif px-8 shadow-md"
+										>
+											Start Building
+										</Button>
+									</div>
 								</div>
 							</div>
 						</motion.div>

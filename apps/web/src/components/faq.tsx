@@ -39,10 +39,16 @@ const items = [
 		id: "3",
 		title: "What are seasons?",
 		content:
-			"Seasons are time-limited periods dedicated to focused building and shipping. Each season brings a fresh start and a cohort of builders working together towards their launch goals.",
+			"Seasons are exciting periods where official events, sponsors, rewards, and perks happen! However, off-seasons are just as important—they are periods where you continue building and sharing without the pressure of an official event. During off-seasons, we have weekly leaderboards sectioned by around 50 users based on when they started, ensuring everyone plays on a fair ground to catch up in their league.",
 	},
 	{
 		id: "4",
+		title: "Who can join?",
+		content:
+			"Anyone from anywhere in the world! We are a completely async global community. Whether you're in Tokyo, New York, or a small village, as long as you have internet and a passion to build, you are welcome.",
+	},
+	{
+		id: "no-following",
 		title: "I don't have any following, can I join?",
 		content:
 			"Absolutely! You don't need an audience to be a part of this. Whether you have zero followers or thousands, what matters is your drive to build and share your work.",
@@ -70,6 +76,29 @@ const items = [
 		title: "Are there prizes?",
 		content:
 			"No, not yet! But we're looking at shipping physical badge pins to everyone who participates, and of course, the most active top 10 will get special ones.",
+	},
+	{
+		id: "9",
+		title: "How do I become active?",
+		content: (
+			<div className="space-y-4">
+				<p>
+					Keep posting progress updates, discover what other people are building
+					and share valuable feedback.
+				</p>
+				<p>
+					Offer discounts or promo codes for other people to try your stuff in
+					exchange for feedback. Post on social media (X, YouTube, Instagram,
+					Threads, LinkedIn) and tag us!
+				</p>
+			</div>
+		),
+	},
+	{
+		id: "9",
+		title: "Are streaks mandatory?",
+		content:
+			"Streaks are completely optional! They are just a fun way to maintain a flame effect on your avatar to show your consistency. Don't stress about it if you miss a week.",
 	},
 ];
 
