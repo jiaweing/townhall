@@ -95,7 +95,7 @@ export default function Home() {
 
 			{/* Season Status Card */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<Card className="col-span-2 bg-card border-sidebar-border">
+				<Card className="col-span-2 bg-card border-sidebar-border -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-[1.01]">
 					<CardHeader>
 						<div className="flex items-center justify-between">
 							<div className="space-y-1">
@@ -143,7 +143,7 @@ export default function Home() {
 				</Card>
 
 				{/* User Stats / Weekly Goal */}
-				<Card>
+				<Card className="rotate-2 hover:rotate-0 transition-transform duration-300 hover:scale-[1.02]">
 					<CardHeader>
 						<CardTitle className="font-serif text-xl flex items-center gap-2">
 							<Trophy className="size-5 text-yellow-500" />
@@ -184,10 +184,18 @@ export default function Home() {
 					</div>
 				) : (
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-						{recentActivity.map((post: any) => (
+						{recentActivity.map((post: any, i: number) => (
 							<Card
 								key={post._id}
-								className="hover:shadow-md transition-shadow"
+								className={`hover:shadow-md transition-all duration-300 hover:scale-[1.02] hover:rotate-0 ${
+									i % 4 === 0
+										? "-rotate-2"
+										: i % 4 === 1
+											? "rotate-2"
+											: i % 4 === 2
+												? "-rotate-3"
+												: "rotate-3"
+								}`}
 							>
 								<CardHeader className="pb-3">
 									<div className="flex items-center gap-3">
