@@ -1,0 +1,23 @@
+{
+  "name": "@townhall/db",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^5",
+    "@townhall/config": "workspace:*"
+  },
+  "dependencies": {
+    "mongoose": "^8.14.0",
+    "dotenv": "catalog:",
+    "zod": "catalog:",
+    "@townhall/env": "workspace:*"
+  }
+}

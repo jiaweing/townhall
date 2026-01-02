@@ -1,0 +1,3 @@
+{
+  "extends": "@townhall/config/tsconfig.base.json"
+}
