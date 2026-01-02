@@ -3,11 +3,11 @@
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import {
-  BankIcon,
-  ChampionIcon,
-  Comment01Icon,
-  Home01Icon,
-  UserIcon,
+	BankIcon,
+	ChampionIcon,
+	Comment01Icon,
+	Home01Icon,
+	UserIcon,
 } from "hugeicons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,7 +24,7 @@ export function Header() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<header className="h-14 bg-background/80 backdrop-blur-sm sticky top-0 z-50 py-10">
+		<header className="h-14 bg-background/80 backdrop-blur-sm sticky top-0 z-30 py-10">
 			<div className="h-full max-w-5xl mx-auto px-4 flex items-center justify-between">
 				{/* Logo */}
 				<Link href="/" className="flex items-center gap-2">

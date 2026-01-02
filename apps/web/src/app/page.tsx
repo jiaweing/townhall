@@ -5,6 +5,7 @@ import { ArrowRight, Flame, Loader2, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Faq } from "@/components/faq";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -148,7 +149,7 @@ export default function Home() {
 					<CardContent className="space-y-4">
 						<div className="text-center py-4">
 							<div className="text-3xl font-medium font-mono text-orange-500">
-								{userStats?.seasonXp || 0} XP
+								{userStats?.seasonXp || 0}
 							</div>
 							<div className="text-muted-foreground text-sm">Season XP</div>
 						</div>
@@ -209,6 +210,8 @@ export default function Home() {
 					</div>
 				)}
 			</section>
+			
+			<Faq />
 		</div>
 	);
 }

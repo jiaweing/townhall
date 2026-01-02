@@ -1,12 +1,14 @@
 import { Header } from "@/components/header";
 import Providers from "@/components/providers";
+import { WelcomeLetter } from "@/components/welcome-letter";
 import type { Metadata } from "next";
-import { Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Instrument_Serif, PT_Serif } from "next/font/google";
 import "../index.css";
 
-const instrumentSans = Instrument_Sans({
-	variable: "--font-instrument-sans",
+const ptSerif = PT_Serif({
+	variable: "--font-pt-serif",
 	subsets: ["latin"],
+	weight: ["400", "700"],
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -28,9 +30,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${instrumentSans.variable} ${instrumentSerif.variable} antialiased`}
+				className={`${ptSerif.variable} ${instrumentSerif.variable} antialiased`}
 			>
 				<Providers>
+					<WelcomeLetter />
 					<div className="min-h-svh w-full bg-background">
 						<Header />
 						<main className="w-full">{children}</main>
