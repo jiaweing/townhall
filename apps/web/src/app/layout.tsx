@@ -1,41 +1,42 @@
-import type { Metadata } from "next";
-
-import { Geist, Geist_Mono } from "next/font/google";
-
-import "../index.css";
-import Header from "@/components/header";
+import { Header } from "@/components/header";
 import Providers from "@/components/providers";
+import type { Metadata } from "next";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
+import "../index.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const instrumentSans = Instrument_Sans({
+	variable: "--font-instrument-sans",
+	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const instrumentSerif = Instrument_Serif({
+	variable: "--font-instrument-serif",
+	weight: "400",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "townhall",
-  description: "townhall",
+	title: "Townhall",
+	description: "Build in public, together.",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            {children}
-          </div>
-        </Providers>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body
+				className={`${instrumentSans.variable} ${instrumentSerif.variable} antialiased`}
+			>
+				<Providers>
+					<div className="min-h-svh w-full bg-background">
+						<Header />
+						<main className="w-full">{children}</main>
+					</div>
+				</Providers>
+			</body>
+		</html>
+	);
 }

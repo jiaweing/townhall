@@ -1,0 +1,24 @@
+{
+	"name": "@townhall/api",
+	"version": "0.1.0",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"scripts": {
+		"clean": "rm -rf .turbo node_modules dist",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"hono": "^4.0.0",
+		"zod": "^3.0.0",
+		"@townhall/db": "workspace:*",
+		"@townhall/auth": "workspace:*",
+		"@townhall/env": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^20.0.0",
+		"typescript": "^5.0.0",
+		"@townhall/config": "workspace:*"
+	}
+}
