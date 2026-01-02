@@ -2,7 +2,7 @@ import { Header } from "@/components/header";
 import Providers from "@/components/providers";
 import { WelcomeLetter } from "@/components/welcome-letter";
 import type { Metadata } from "next";
-import { Instrument_Serif, PT_Serif } from "next/font/google";
+import { Dancing_Script, Instrument_Serif, PT_Serif } from "next/font/google";
 import "../index.css";
 
 const ptSerif = PT_Serif({
@@ -15,6 +15,12 @@ const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
 	weight: "400",
 	subsets: ["latin"],
+});
+
+const dancingScript = Dancing_Script({
+	variable: "--font-dancing-script",
+	subsets: ["latin"],
+	weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +36,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${ptSerif.variable} ${instrumentSerif.variable} antialiased`}
+				className={`${ptSerif.variable} ${instrumentSerif.variable} ${dancingScript.variable} antialiased`}
 			>
 				<Providers>
 					<WelcomeLetter />

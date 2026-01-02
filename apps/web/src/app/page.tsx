@@ -15,6 +15,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { client } from "@/lib/api";
+import { authClient } from "@/lib/auth-client";
 
 export default function Home() {
 	const [userStats, setUserStats] = useState<any>(null);
@@ -65,6 +66,9 @@ export default function Home() {
 		return Math.min(Math.max(diffWeeks, 1), 6);
 	};
 
+	// auth session for greeting
+	const { data: session } = authClient.useSession();
+
 	const week = getSeasonWeek();
 	const active = season?.isActive ?? false;
 
@@ -81,7 +85,7 @@ export default function Home() {
 			{/* Hero / Welcome */}
 			<section className="space-y-4">
 				<h1 className="text-4xl font-serif font-medium tracking-tight">
-					Welcome back, Builder.
+					Welcome back, {session?.user.name ?? "builder"}.
 				</h1>
 				<p className="text-muted-foreground text-lg max-w-2xl">
 					Townhall is where you build cool shit in public. Share updates, earn
@@ -210,7 +214,7 @@ export default function Home() {
 					</div>
 				)}
 			</section>
-			
+
 			<Faq />
 		</div>
 	);

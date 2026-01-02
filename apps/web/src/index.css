@@ -115,6 +115,7 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   --font-serif: var(--font-instrument-serif), serif;
+  --font-signature: var(--font-dancing-script), cursive;
   --animate-bounce-game: bounce-game 2s infinite;
   --animate-bounce-slow: bounce 3s infinite;
 
@@ -170,5 +171,8 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+  .font-signature {
+    font-family: var(--font-dancing-script), cursive;
   }
 }
