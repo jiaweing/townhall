@@ -12,6 +12,7 @@
 	"dependencies": {
 		"hono": "^4.0.0",
 		"zod": "^3.0.0",
+		"mongodb": "^6.0.0",
 		"@townhall/db": "workspace:*",
 		"@townhall/auth": "workspace:*",
 		"@townhall/env": "workspace:*"

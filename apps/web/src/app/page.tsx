@@ -27,22 +27,22 @@ export default function Home() {
 		const fetchData = async () => {
 			try {
 				// Fetch user stats
-				const statsRes = await client.user.me.$get();
+				const statsRes = await (client as any).user.me.$get({});
 				if (statsRes.ok) {
-					setUserStats(await statsRes.json());
+					setUserStats((await statsRes.json()) as any);
 				}
 
 				// Fetch recent activity (first 3 posts)
-				const activityRes = await client.updates.$get();
+				const activityRes = await (client as any).updates.$get({});
 				if (activityRes.ok) {
-					const posts = await activityRes.json();
+					const posts = (await activityRes.json()) as any[];
 					setRecentActivity(posts.slice(0, 3));
 				}
 
 				// Fetch current season
-				const seasonRes = await client.season.current.$get();
+				const seasonRes = await (client as any).season.current.$get({});
 				if (seasonRes.ok) {
-					const data = await seasonRes.json();
+					const data = (await seasonRes.json()) as any;
 					setSeason(data.season);
 				}
 			} catch (e) {

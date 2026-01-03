@@ -13,10 +13,10 @@ export default function LeaderboardPage() {
 	useEffect(() => {
 		const fetchLeaderboard = async () => {
 			try {
-				const res = await client.user.leaderboard.$get();
+				const res = await (client as any).user.leaderboard.$get({});
 				if (res.ok) {
 					const data = await res.json();
-					setLeaderboard(data);
+					setLeaderboard(data as any[]);
 				}
 			} catch (e) {
 				console.error(e);

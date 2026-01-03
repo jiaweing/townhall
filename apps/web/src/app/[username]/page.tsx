@@ -18,7 +18,7 @@ export default function ProfilePage({
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const res = await client.user[":username"].$get({
+				const res = await (client as any).profile[":username"].$get({
 					param: { username },
 				});
 				if (res.ok) {
@@ -121,7 +121,7 @@ export default function ProfilePage({
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-2">
 								<img
-									src="/assets/icons/Activities/1st_place_medal.png"
+									src="/assets/icons/Activities/1st Place Medal.png"
 									alt="Gold"
 									className="size-6"
 								/>
@@ -132,7 +132,7 @@ export default function ProfilePage({
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-2">
 								<img
-									src="/assets/icons/Activities/2nd_place_medal.png"
+									src="/assets/icons/Activities/2nd Place Medal.png"
 									alt="Silver"
 									className="size-6"
 								/>
@@ -143,7 +143,7 @@ export default function ProfilePage({
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-2">
 								<img
-									src="/assets/icons/Activities/3rd_place_medal.png"
+									src="/assets/icons/Activities/3rd Place Medal.png"
 									alt="Bronze"
 									className="size-6"
 								/>

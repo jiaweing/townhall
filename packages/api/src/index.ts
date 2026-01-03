@@ -7,7 +7,7 @@ const app = new Hono();
 
 app.route("/season", seasonRouter);
 app.route("/updates", updatesRouter);
-app.route("/user", userRouter);
+app.route("/profile", userRouter);
 
 export default app;
 export type AppType = typeof app;

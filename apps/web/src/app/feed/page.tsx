@@ -17,10 +17,10 @@ export default function FeedPage() {
 
 	const fetchPosts = async () => {
 		try {
-			const res = await client.updates.$get();
+			const res = await (client as any).updates.$get({});
 			if (res.ok) {
 				const data = await res.json();
-				setPosts(data);
+				setPosts(data as any[]);
 			}
 		} catch (e) {
 			console.error(e);
@@ -37,7 +37,7 @@ export default function FeedPage() {
 		if (!content.trim()) return;
 		setIsLoading(true);
 		try {
-			const res = await client.updates.$post({
+			const res = await (client as any).updates.$post({
 				json: { content },
 			});
 			if (res.ok) {

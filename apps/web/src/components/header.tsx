@@ -25,17 +25,21 @@ export function Header() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<header className="sticky top-0 z-30 py-4 h-24">
-			<ProgressiveBlur className="top-0 h-48" blurAmount="20px" />
-			<div className="h-full max-w-5xl mx-auto px-4 flex items-center justify-between relative z-10">
+		<header className="fixed bottom-0 w-full md:sticky md:top-0 z-30 py-4 h-24 pointer-events-none md:pointer-events-auto">
+			<ProgressiveBlur
+				className="absolute bottom-0 h-48 md:hidden"
+				blurAmount="20px"
+				position="bottom"
+			/>
+			<ProgressiveBlur
+				className="hidden md:block top-0 h-48"
+				blurAmount="20px"
+			/>
+			<div className="h-full max-w-5xl mx-auto px-4 flex items-center justify-center gap-6 md:justify-between md:gap-0 relative z-10 pointer-events-auto">
 				{/* Logo */}
-				<Link href="/" className="flex items-center gap-2">
+				<Link href="/" className="hidden md:flex items-center gap-2">
 					<div className="size-9 rounded-xl flex items-center justify-center p-0.5">
-						<BankIcon
-							size={24}
-							className="text-secondary-foreground"
-							variant="solid"
-						/>
+						<BankIcon size={24} className="text-secondary-foreground" />
 					</div>
 				</Link>
 
@@ -46,9 +50,9 @@ export function Header() {
 						return (
 							<Link
 								key={item.href}
-								href={item.href}
+								href={item.href as any}
 								className={cn(
-									"p-3 rounded-2xl transition-colors",
+									"p-2 rounded-2xl transition-colors",
 									isActive
 										? "text-foreground"
 										: "text-muted-foreground/50 hover:bg-muted transition-colors duration-300",
@@ -65,9 +69,9 @@ export function Header() {
 
 					{session && (
 						<Link
-							href={`/${session.user.id}`}
+							href={`/${session.user.id}` as any}
 							className={cn(
-								"p-3 rounded-2xl transition-colors",
+								"p-2 rounded-2xl transition-colors",
 								pathname.startsWith(`/${session.user.id}`)
 									? "text-foreground"
 									: "text-muted-foreground/50 hover:bg-muted transition-colors duration-300",
