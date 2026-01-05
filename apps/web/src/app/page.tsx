@@ -100,7 +100,18 @@ export default function Home() {
 					style={{ backgroundImage: "url('/assets/backgrounds/1.png')" }}
 				>
 					<div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-0" />
-					<CardHeader className="relative z-10">
+
+					{/* Main Card Link Overlay */}
+					{season && (
+						<Link
+							href={`/season/${season.number}`}
+							className="absolute inset-0 z-[5]"
+						>
+							<span className="sr-only">View Season {season.number}</span>
+						</Link>
+					)}
+
+					<CardHeader className="relative">
 						<div className="flex items-center justify-between">
 							<div className="space-y-1">
 								<CardTitle className="font-serif text-2xl text-white">
@@ -114,7 +125,7 @@ export default function Home() {
 							</div>
 						</div>
 					</CardHeader>
-					<CardContent className="space-y-6 relative z-10">
+					<CardContent className="space-y-6 relative">
 						{active && (
 							<div className="space-y-2">
 								<div className="flex justify-between text-sm text-white/90">
@@ -130,7 +141,7 @@ export default function Home() {
 							</div>
 						)}
 
-						<div className="flex gap-4">
+						<div className="flex gap-4 relative z-20">
 							<Link href="/feed">
 								<Button className="bg-white text-black hover:bg-white/90 border-none shadow-lg">
 									Post an Update <ArrowRight className="ml-2 size-4" />

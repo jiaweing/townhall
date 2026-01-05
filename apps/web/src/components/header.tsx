@@ -44,7 +44,12 @@ export function Header() {
 				</Link>
 
 				{/* Center Nav Icons */}
-				<nav className="flex items-center gap-5">
+				<nav
+					className={cn(
+						"flex items-center gap-5",
+						pathname?.startsWith("/season") && "hidden",
+					)}
+				>
 					{NAV_ITEMS.map((item) => {
 						const isActive = pathname === item.href;
 						return (
