@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
 	Environment,
 	Lightformer,
+	Text,
 	useGLTF,
 	useTexture,
 } from "@react-three/drei";
@@ -43,6 +45,12 @@ export default function Lanyard({
 	const [isMobile, setIsMobile] = useState<boolean>(
 		() => typeof window !== "undefined" && window.innerWidth < 768,
 	);
+	const { data: session } = authClient.useSession();
+	const user = {
+		firstName: session?.user?.name.split(" ")[0] || "Sign",
+		lastName: session?.user?.name.split(" ").slice(1).join(" ") || "In",
+		title: "Participant",
+	};
 
 	useEffect(() => {
 		const handleResize = (): void => setIsMobile(window.innerWidth < 768);
@@ -62,7 +70,7 @@ export default function Lanyard({
 			>
 				<ambientLight intensity={Math.PI} />
 				<Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-					<Band isMobile={isMobile} />
+					<Band isMobile={isMobile} user={user} />
 				</Physics>
 				<Environment blur={0.75}>
 					<Lightformer
@@ -103,9 +111,19 @@ interface BandProps {
 	maxSpeed?: number;
 	minSpeed?: number;
 	isMobile?: boolean;
+	user: {
+		firstName: string;
+		lastName: string;
+		title: string;
+	};
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
+function Band({
+	maxSpeed = 50,
+	minSpeed = 0,
+	isMobile = false,
+	user,
+}: BandProps) {
 	const { width, height } = useThree((state) => state.size);
 	// Using "any" for refs since the exact types depend on Rapier's internals
 	const band = useRef<any>(null);
@@ -277,6 +295,76 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
 							material-roughness={0.3}
 						/>
 						<mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+						<group scale={0.2} position={[-0.3, 0.8, 0.02]}>
+							{/* Shadow Layer */}
+							<group position={[0.07, -0.07, -0.05]}>
+								<Text
+									color="black"
+									fontSize={0.5}
+									font="/fonts/Inter-SemiBold.ttf"
+									position={[0, 0, 0]}
+									textAlign="left"
+									anchorX="left"
+									fillOpacity={0.2}
+								>
+									{user.firstName}
+								</Text>
+								<Text
+									color="black"
+									fontSize={0.5}
+									font="/fonts/Inter-SemiBold.ttf"
+									position={[0, -0.6, 0]}
+									textAlign="left"
+									anchorX="left"
+									fillOpacity={0.2}
+								>
+									{user.lastName}
+								</Text>
+								<Text
+									color="black"
+									fontSize={0.25}
+									font="/fonts/Inter-Regular.ttf"
+									position={[0.05, -1.2, 0]}
+									textAlign="left"
+									anchorX="left"
+									fillOpacity={0.2}
+								>
+									{user.title}
+								</Text>
+							</group>
+
+							{/* Main Text Layer */}
+							<Text
+								color="white"
+								fontSize={0.5}
+								font="/fonts/Inter-ExtraBold.ttf"
+								position={[0, 0, 0]}
+								textAlign="left"
+								anchorX="left"
+							>
+								{user.firstName}
+							</Text>
+							<Text
+								color="white"
+								fontSize={0.5}
+								font="/fonts/Inter-ExtraBold.ttf"
+								position={[0, -0.6, 0]}
+								textAlign="left"
+								anchorX="left"
+							>
+								{user.lastName}
+							</Text>
+							<Text
+								color="white"
+								fontSize={0.25}
+								font="/fonts/Inter-Bold.ttf"
+								position={[0.05, -1.2, 0]}
+								textAlign="left"
+								anchorX="left"
+							>
+								{user.title}
+							</Text>
+						</group>
 					</group>
 				</RigidBody>
 			</group>

@@ -12,7 +12,7 @@ import Link from "next/link";
 export default function SeasonOnePage() {
 	return (
 		<main className="min-h-screen bg-black text-white overflow-x-hidden selection:bg-orange-500 selection:text-white md:-mt-24 relative z-0">
-			<div className="hidden md:block fixed top-0 right-0 z-50 h-screen w-1/3 pointer-events-none">
+			<div className="hidden md:block fixed top-0 right-0 z-50 h-screen w-screen pointer-events-none">
 				<Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
 			</div>
 			<BlueprintHero />
